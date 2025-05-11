@@ -4,14 +4,24 @@ interface PlayerProps {
   initialName: string;
   symbol: string;
   isActive: boolean;
+  onChangeName: (symbol: string, newName: string) => void;
 }
 
-const Player = ({ initialName, symbol, isActive }: PlayerProps) => {
+const Player = ({
+  initialName,
+  symbol,
+  isActive,
+  onChangeName,
+}: PlayerProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
 
   const handleEditClick = () => {
     setIsEditing((prev) => !prev);
+
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   };
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {

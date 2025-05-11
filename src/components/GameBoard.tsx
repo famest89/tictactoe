@@ -1,29 +1,12 @@
-import type { TurnsObject } from '../App';
-
 interface GameBoardProps {
   onSelectSquare: (row: number, col: number) => void;
-  turns: TurnsObject[];
+  board: string[][];
 }
 
-const initialGameBoard = [
-  ['', '', ''],
-  ['', '', ''],
-  ['', '', ''],
-];
-
-const GameBoard = ({ onSelectSquare, turns }: GameBoardProps) => {
-  const gameBoard = initialGameBoard;
-
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-
-    gameBoard[row][col] = player;
-  }
-
+const GameBoard = ({ onSelectSquare, board }: GameBoardProps) => {
   return (
     <ol id='game-board'>
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
